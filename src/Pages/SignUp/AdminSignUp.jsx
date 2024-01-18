@@ -1,10 +1,15 @@
 import { Avatar, Box, Button, Container, CssBaseline, Grid, InputLabel, Link, MenuItem, Select, TextField, Typography, createTheme } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 const defaultTheme = createTheme();
 
 const AdminSignUp = () => {
+    const {createUser} = useContext(AuthContext)
     const [packages, setpackages] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         setpackages(event.target.value);
@@ -19,7 +24,28 @@ const AdminSignUp = () => {
         const company = form.company.value; 
         const logo = form.logo.value; 
         console.log(email,password,logo,name,company,packages,dob);
-        }
+
+
+         //signup
+     createUser(email,password)
+    .then(result=>{
+        console.log(result.user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Account created",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        navigate('/')
+
+    })
+    .catch(error=>{
+        console.log(error);
+    })
+
+
+  }
   return (
     <div className="pt-20">
       <ThemeProvider theme={defaultTheme}>

@@ -1,8 +1,17 @@
 import { Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography, createTheme } from "@mui/material";
+import { useContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 const defaultTheme = createTheme();
 
 const EmployeeSignUp = () => {
+    const {createUser} = useContext(AuthContext)
+    const [registerError, setRegisterError] = useState('')
+    const navigate = useNavigate();
+    
+
     const handleEmployeeSignUp = event =>{
     event.preventDefault();
     const form = event.target;
@@ -11,7 +20,27 @@ const EmployeeSignUp = () => {
     const password = form.password.value;
     const dob = form.dob.value;
     console.log(name,email,password,dob);
-    }
+
+
+    //signup
+    createUser(email,password)
+    .then(result=>{
+        console.log(result.user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Account created",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        navigate('/')
+    })
+    .catch(error=>{
+        console.log(error);
+    })
+
+
+}
 
   return (
     <div className="pt-20">
@@ -96,7 +125,6 @@ const EmployeeSignUp = () => {
           </Grid>
           <br />
         </Box>
-        {/* {registerError && <p className="text-red-500">{registerError}</p>} */}
       </Box>
     </Container>
     </ThemeProvider>

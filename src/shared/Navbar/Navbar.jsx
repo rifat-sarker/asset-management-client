@@ -1,6 +1,17 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
+
+  const handleLogOut =()=>{
+    logOut()
+    .then()
+    .catch(error=> console.log(error))
+  }
+
   const Navlinks = (
     <>
       <li>
@@ -12,9 +23,39 @@ const Navbar = () => {
       <li>
         <Link to="/admin">Join as Admin</Link>
       </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
+
+      {user ? (
+        <>
+          <div className="flex justify-center items-center">
+            <img
+              className="h-12 rounded-full mr-2 "
+              src={user.photoURL}
+              alt=""
+            />
+            <p>{user.displayName}</p>
+            <li>
+              <Link onClick={handleLogOut}>LogOut</Link>
+            </li>
+          </div>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </>
+      )}
+      {/* {user ? (
+        <>
+          <li><Link onClick={handleLogOut}>Logout</Link></li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </>
+      )} */}
     </>
   );
   return (
@@ -54,9 +95,7 @@ const Navbar = () => {
         <span className="text-3xl font-bold">Innovi</span>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu text-xl menu-horizontal px-1">
-          {Navlinks}
-        </ul>
+        <ul className="menu text-xl menu-horizontal px-1">{Navlinks}</ul>
       </div>
       <div className="navbar-end">
         <a className="btn">Button</a>
