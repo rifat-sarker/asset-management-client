@@ -7,10 +7,30 @@ import { useNavigate } from "react-router-dom";
 const defaultTheme = createTheme();
 
 const EmployeeSignUp = () => {
-    const {createUser} = useContext(AuthContext)
+    const {createUser,updateUserProfile,googleLogin} = useContext(AuthContext)
     const [registerError, setRegisterError] = useState('')
     const navigate = useNavigate();
     
+
+
+      //google login
+      const  handleGoogleLogin =()=>{
+        googleLogin()
+        .then(result=>{
+          console.log(result.user);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Account created",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          navigate('/')
+        })
+        .catch(error=> console.log(error))
+
+      }
+
 
     const handleEmployeeSignUp = event =>{
     event.preventDefault();
@@ -22,10 +42,12 @@ const EmployeeSignUp = () => {
     console.log(name,email,password,dob);
 
 
+
     //signup
     createUser(email,password)
     .then(result=>{
         console.log(result.user);
+        // updateUserProfile(event:name)
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -121,6 +143,7 @@ const EmployeeSignUp = () => {
               <p>
                 Already have an account? <Link href="/login">Login</Link>
               </p>
+             <Button onClick={handleGoogleLogin} variant="contained" sx={{my:2}} >Google</Button>
             </Grid>
           </Grid>
           <br />

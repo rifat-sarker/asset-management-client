@@ -4,58 +4,68 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
 
-  const handleLogOut =()=>{
+  const handleLogOut = () => {
     logOut()
-    .then()
-    .catch(error=> console.log(error))
-  }
+      .then()
+      .catch((error) => console.log(error));
+  };
 
   const Navlinks = (
     <>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/employee">Join as Employee</Link>
-      </li>
-      <li>
-        <Link to="/admin">Join as Admin</Link>
-      </li>
-
       {user ? (
         <>
-          <div className="flex justify-center items-center">
-            <img
-              className="h-12 rounded-full mr-2 "
-              src={user.photoURL}
-              alt=""
-            />
-            <p>{user.displayName}</p>
-            <li>
-              <Link onClick={handleLogOut}>LogOut</Link>
-            </li>
-          </div>
+          <li>
+            <Link to="/dashboard/employeeHome">Home</Link>
+          </li>
+          <li>
+            <Link to="/">My Assets</Link>
+          </li>
+          <li>
+            <Link to="/">My Team</Link>
+          </li>
+          <li>
+            <Link to="/">Request for an Asset</Link>
+          </li>
+          <li>
+            <Link to="/">Make a custom request</Link>
+          </li>
+          <li>
+            <details className="dropdown">
+              <summary>
+                <img
+                  className="h-12 rounded-full mr-2 "
+                  src={user.photoURL}
+                  alt=""
+                />
+              </summary>
+              <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                <li>
+                  <p>{user.displayName}</p>
+                </li>
+                <li>
+                  <Link onClick={handleLogOut}>LogOut</Link>
+                </li>
+              </ul>
+            </details>
+          </li>
         </>
       ) : (
         <>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/employee">Join as Employee</Link>
+          </li>
+          <li>
+            <Link to="/admin">Join as Admin</Link>
+          </li>
           <li>
             <Link to="/login">Login</Link>
           </li>
         </>
       )}
-      {/* {user ? (
-        <>
-          <li><Link onClick={handleLogOut}>Logout</Link></li>
-        </>
-      ) : (
-        <>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </>
-      )} */}
     </>
   );
   return (
@@ -85,21 +95,43 @@ const Navbar = () => {
             {Navlinks}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">
-          <img
-            className="h-12  w-12 rounded-full"
-            src={"https://i.ibb.co/Q8pSG87/7580b4102141269-5f2fed6475b53.jpg"}
-            alt=""
-          />
-        </a>{" "}
-        <span className="text-3xl font-bold">Innovi</span>
+
+        {user ? (
+          <>
+            <a className="btn btn-ghost text-xl">
+              <img
+                className="h-12  w-12 rounded-full"
+                src={
+                  "https://i.ibb.co/Q8pSG87/7580b4102141269-5f2fed6475b53.jpg"
+                }
+                alt=""
+              />
+            </a>{" "}
+            <span className="text-3xl font-bold">Sonexa</span>
+          </>
+        ) : (
+          <>
+            <a className="btn btn-ghost text-xl">
+              <img
+                className="h-12  w-12 rounded-full"
+                src={
+                  "https://i.ibb.co/Q8pSG87/7580b4102141269-5f2fed6475b53.jpg"
+                }
+                alt=""
+              />
+            </a>{" "}
+            <span className="text-3xl font-bold">Innovi</span>
+          </>
+        )}
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu text-xl menu-horizontal px-1">{Navlinks}</ul>
+        <ul className="menu  font-semibold flex items-center menu-horizontal px-1">
+          {Navlinks}
+        </ul>
       </div>
-      <div className="navbar-end">
+      {/* <div className="navbar-end">
         <a className="btn">Button</a>
-      </div>
+      </div> */}
     </div>
   );
 };

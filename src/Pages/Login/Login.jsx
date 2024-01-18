@@ -10,6 +10,27 @@ const Login = () => {
     const {login,googleLogin} = useContext(AuthContext)
     const navigate = useNavigate();
 
+
+
+     //google login
+     const  handleGoogleLogin =()=>{
+        googleLogin()
+        .then(result=>{
+          console.log(result.user);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Account login successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          navigate('/')
+        })
+        .catch(error=> console.log(error))
+
+      }
+
+
  const handleLogin = (event)=>{
     event.preventDefault();
     const form = event.target;
@@ -95,6 +116,7 @@ const Login = () => {
                   <p>
                     Dont have an account? <Link href="/employee">Sign Up</Link>
                   </p>
+                  <Button onClick={handleGoogleLogin} variant="contained" sx={{my:2}} >Google</Button>
                 </Grid>
               </Grid>
               <br />
