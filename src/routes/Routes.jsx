@@ -6,6 +6,7 @@ import AdminSignUp from "../Pages/SignUp/AdminSignUp";
 import EmployeeSignUp from "../Pages/SignUp/EmployeeSignUp";
 import Dashboard from "../Layout/Dashboard";
 import EmployeeHome from "../Pages/Dashboard/EmployeeHome/EmployeeHome";
+import CustomRequest from "../Pages/Dashboard/EmployeeHome/CustomRequest/CustomRequest";
 
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "employeeHome",
         element: <EmployeeHome></EmployeeHome>,
+      },
+      {
+        path: "customRequest",
+        element: <CustomRequest></CustomRequest>,
       },
       
     ]

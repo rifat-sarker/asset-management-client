@@ -5,7 +5,6 @@ import Navbar from "../shared/Navbar/Navbar";
 const Dashboard = () => {
   return (
     <div>
-      <Navbar></Navbar>
       <Outlet></Outlet>
     </div>
   );

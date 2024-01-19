@@ -9,7 +9,7 @@ const Banner = () => {
       <div className="carousel w-full">
         <div id="slide1" className="carousel-item relative w-full">
           <img
-            src={"https://i.ibb.co/dkz497h/computer-4796017.jpg"}
+            src={"https://i.ibb.co/Ln3ZJpy/website-3374825-1920.jpg"}
             className="w-full"
           />
 

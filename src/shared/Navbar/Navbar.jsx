@@ -28,7 +28,7 @@ const Navbar = () => {
             <Link to="/">Request for an Asset</Link>
           </li>
           <li>
-            <Link to="/">Make a custom request</Link>
+            <Link to="/dashboard/customRequest">Make a custom request</Link>
           </li>
           <li>
             <details className="dropdown">
