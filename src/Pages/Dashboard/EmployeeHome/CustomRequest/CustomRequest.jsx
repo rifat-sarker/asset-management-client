@@ -32,7 +32,7 @@ const CustomRequest = () => {
           </div>
           <input
             type="text"
-            {...register("name", { required: true })}
+            {...register("asset_name", { required: true })}
             placeholder="Asset Name"
             className="input input-bordered  w-full"
           />
@@ -43,7 +43,7 @@ const CustomRequest = () => {
           </div>
           <input
             type="text"
-            {...register("asset-name", { required: true })}
+            {...register("asset_image", { required: true })}
             placeholder="Asset image"
             className="input input-bordered  w-full"
           />
@@ -86,7 +86,7 @@ const CustomRequest = () => {
           </div>
           <textarea
             className="textarea textarea-bordered h-16"
-            {...register("additional-info")}
+            {...register("additional_info")}
             placeholder="Additional Information"
           ></textarea>
         </label>
@@ -97,7 +97,7 @@ const CustomRequest = () => {
           </div>
           <textarea
             className="textarea textarea-bordered h-16"
-            {...register("why-need-this")}
+            {...register("why_need_this")}
             placeholder="Why Need this"
           ></textarea>
         </label>{" "}

@@ -7,6 +7,7 @@ import EmployeeSignUp from "../Pages/SignUp/EmployeeSignUp";
 import Dashboard from "../Layout/Dashboard";
 import EmployeeHome from "../Pages/Dashboard/EmployeeHome/EmployeeHome";
 import CustomRequest from "../Pages/Dashboard/EmployeeHome/CustomRequest/CustomRequest";
+import CustomDetails from "../Pages/Dashboard/EmployeeHome/CustomDetails/CustomDetails";
 
 
 export const router = createBrowserRouter([
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
       {
         path: "customRequest",
         element: <CustomRequest></CustomRequest>,
+      },
+      {
+        path: "employeeHome/:id",
+        element: <CustomDetails></CustomDetails>,
       },
       
     ]
