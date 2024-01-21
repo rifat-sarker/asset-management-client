@@ -4,7 +4,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-
+  const isAdmin = true;
   const handleLogOut = () => {
     logOut()
       .then()
@@ -14,42 +14,89 @@ const Navbar = () => {
   const Navlinks = (
     <>
       {user ? (
-        <>
-          <li>
-            <Link to="/dashboard/employeeHome">Home</Link>
-          </li>
-          <li>
-            <Link to="/">My Assets</Link>
-          </li>
-          <li>
-            <Link to="/">My Team</Link>
-          </li>
-          <li>
-            <Link to="/">Request for an Asset</Link>
-          </li>
-          <li>
-            <Link to="/dashboard/customRequest">Make a custom request</Link>
-          </li>
-          <li>
-            <details className="dropdown">
-              <summary>
-                <img
-                  className="h-12 rounded-full mr-2 "
-                  src={user.photoURL}
-                  alt=""
-                />
-              </summary>
-              <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                <li>
-                  <p>{user.displayName}</p>
-                </li>
-                <li>
-                  <Link onClick={handleLogOut}>LogOut</Link>
-                </li>
-              </ul>
-            </details>
-          </li>
-        </>
+        isAdmin ? (
+          <>
+            <li>
+              <Link to="/dashboard/adminHome">Home</Link>
+            </li>
+            <li>
+              <Link to="/"> Asset List</Link>
+            </li>
+            <li>
+              <Link to="/">Add an Asset </Link>
+            </li>
+            <li>
+              <Link to="/">All Requests</Link>
+            </li>
+            <li>
+              <Link to="">Custom Requests List</Link>
+            </li>
+            <li>
+              <Link to="/dashboard/employeeList">My Employee List</Link>
+            </li>
+            <li>
+              <Link to="">Add an Employee</Link>
+            </li>
+            <li>
+              <details className="">
+                <summary className="">Profile</summary>
+                <ul className=" smenu dropdown-content z-[1] bg-base-100 rounded-box max-w-full">
+                  <li>
+                    <img
+                      className="h-16 w-20 rounded-full"
+                      src={user.photoURL}
+                      alt="user_photo"
+                    />
+                  </li>
+                  <li>
+                    <p>{user.displayName}</p>
+                  </li>
+                  <li>
+                    <Link onClick={handleLogOut}>LogOut</Link>
+                  </li>
+                </ul>
+              </details>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/dashboard/employeeHome">Home</Link>
+            </li>
+            <li>
+              <Link to="/">My Assets</Link>
+            </li>
+            <li>
+              <Link to="/">My Team</Link>
+            </li>
+            <li>
+              <Link to="/">Request for an Asset</Link>
+            </li>
+            <li>
+              <Link to="/dashboard/customRequest">Make a custom request</Link>
+            </li>
+            <li>
+              <details className="">
+                <summary className="">Profile</summary>
+                <ul className=" smenu dropdown-content z-[1] bg-base-100 rounded-box max-w-full">
+                  <li>
+                    <img
+                      className="h-16 w-20 rounded-full"
+                      src={user.photoURL}
+                      alt="user_photo"
+                    />
+                  </li>
+                  <li>
+                    <p>{user.displayName}</p>
+                  </li>
+                  <li>
+                    <Link onClick={handleLogOut}>LogOut</Link>
+                  </li>
+                </ul>
+              </details>
+            </li>
+          </>
+        )
       ) : (
         <>
           <li>
@@ -69,7 +116,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 max-w-screen-xl  mx-auto z-40 text-white bg-opacity-30 fixed ">
+    <div className="navbar bg-base-300 max-w-screen-x bg-opacity-30  mx-auto z-40 text-white sticky top-0">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

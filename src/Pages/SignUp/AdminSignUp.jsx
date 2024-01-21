@@ -4,12 +4,14 @@ import { ThemeProvider } from "styled-components";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const defaultTheme = createTheme();
 
 const AdminSignUp = () => {
-    const {createUser} = useContext(AuthContext)
+    const {createUser,updateUserProfile} = useContext(AuthContext)
     const [packages, setpackages] = useState('');
     const navigate = useNavigate();
+    const axiosSecure= useAxiosSecure();
 
     const handleChange = (event) => {
         setpackages(event.target.value);
@@ -19,6 +21,7 @@ const AdminSignUp = () => {
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
+        const image = form.image.value;
         const password = form.password.value;
         const dob = form.dob.value;
         const company = form.company.value; 
@@ -30,14 +33,31 @@ const AdminSignUp = () => {
      createUser(email,password)
     .then(result=>{
         console.log(result.user);
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Account created",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        navigate('/')
+        updateUserProfile(name,image)
+        .then(()=>{
+          const adminInfo = {
+            name,
+            email: email,
+            dob,
+            image,
+            }
+
+          axiosSecure.post('/employees', adminInfo)
+          .then(res=>{
+            console.log(res.data);
+            if(res.data.insertedId){
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Admin created",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              navigate('/adminHome')
+            }
+          })
+        })
+       
 
     })
     .catch(error=>{
@@ -79,6 +99,16 @@ const AdminSignUp = () => {
                 label="Full Name"
                 name="name"
                 autoComplete="Name"
+                autoFocus
+              />
+                <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="image"
+                label="Image URL"
+                name="image"
+                autoComplete="Image URL"
                 autoFocus
               />
               <TextField

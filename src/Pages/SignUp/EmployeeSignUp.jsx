@@ -4,12 +4,14 @@ import { ThemeProvider } from "styled-components";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const defaultTheme = createTheme();
 
 const EmployeeSignUp = () => {
     const {createUser,updateUserProfile,googleLogin} = useContext(AuthContext)
     const [registerError, setRegisterError] = useState('')
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
     
 
 
@@ -37,9 +39,10 @@ const EmployeeSignUp = () => {
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
+    const image = form.image.value;
     const password = form.password.value;
     const dob = form.dob.value;
-    console.log(name,email,password,dob);
+    console.log(name,email,password,dob,image);
 
 
 
@@ -47,15 +50,32 @@ const EmployeeSignUp = () => {
     createUser(email,password)
     .then(result=>{
         console.log(result.user);
-        // updateUserProfile(event:name)
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Account created",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        navigate('/')
+        updateUserProfile(name,image)
+        .then(()=>{
+          console.log('employee profile info updated');
+          const employeeInfo = {
+          name,
+          email: email,
+          dob,
+          image,
+          }
+        axiosSecure.post('/employees', employeeInfo)
+        .then(res=>{
+          console.log(res.data);
+          if(res.data.insertedId){
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Account created",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            navigate('/dashboard/employeeHome')
+          }
+        })
+
+        })
+       
     })
     .catch(error=>{
         console.log(error);
@@ -96,7 +116,17 @@ const EmployeeSignUp = () => {
             id="name"
             label="Full Name"
             name="name"
-            autoComplete="Name"
+            autoComplete="Full Name"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="image"
+            label="Image URL"
+            name="image"
+            autoComplete="Image URL"
             autoFocus
           />
           <TextField

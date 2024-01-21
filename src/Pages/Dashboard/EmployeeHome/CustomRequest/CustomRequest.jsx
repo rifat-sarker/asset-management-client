@@ -23,7 +23,7 @@ const CustomRequest = () => {
   };
 
   return (
-    <div className="mt-12 ">
+    <div>
       <form className="w-3/4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-6">
         <label className="form-control w-full my-6">

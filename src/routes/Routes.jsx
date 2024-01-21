@@ -8,6 +8,10 @@ import Dashboard from "../Layout/Dashboard";
 import EmployeeHome from "../Pages/Dashboard/EmployeeHome/EmployeeHome";
 import CustomRequest from "../Pages/Dashboard/EmployeeHome/CustomRequest/CustomRequest";
 import CustomDetails from "../Pages/Dashboard/EmployeeHome/CustomDetails/CustomDetails";
+import EmployeeList from "../Pages/Dashboard/Admin/EmployeeList/EmployeeList";
+
+
+
 
 
 export const router = createBrowserRouter([
@@ -31,10 +35,6 @@ export const router = createBrowserRouter([
         path: "/employee",
         element: <EmployeeSignUp></EmployeeSignUp>,
       },
-      // {
-      //   path: "/employeeHome",
-      //   element: <EmployeeHome></EmployeeHome>,
-      // },
     ],
   },
   {
@@ -47,13 +47,21 @@ export const router = createBrowserRouter([
         element: <EmployeeHome></EmployeeHome>,
       },
       {
+        path: "employeeHome/:id",
+        element: <CustomDetails></CustomDetails>
+      },
+      
+      {
         path: "customRequest",
         element: <CustomRequest></CustomRequest>,
       },
+      // admin related routes
       {
-        path: "employeeHome/:id",
-        element: <CustomDetails></CustomDetails>,
+        path: "employeeList",
+        element: <EmployeeList></EmployeeList>,
       },
+    
+    
       
     ]
   }
