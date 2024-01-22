@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  const isAdmin = true;
+  const [isAdmin ]= useAdmin();
   const handleLogOut = () => {
     logOut()
       .then()
@@ -40,7 +41,7 @@ const Navbar = () => {
             <li>
               <details className="">
                 <summary className="">Profile</summary>
-                <ul className=" smenu dropdown-content z-[1] bg-base-100 rounded-box max-w-full">
+                <ul className="menu dropdown-content z-[1] bg-base-100 rounded-box max-w-full">
                   <li>
                     <img
                       className="h-16 w-20 rounded-full"
@@ -78,10 +79,10 @@ const Navbar = () => {
             <li>
               <details className="">
                 <summary className="">Profile</summary>
-                <ul className=" smenu dropdown-content z-[1] bg-base-100 rounded-box max-w-full">
+                <ul className=" menu dropdown-content z-[1] bg-base-100 rounded-box max-w-full">
                   <li>
                     <img
-                      className="h-16 w-20 rounded-full"
+                      className="h-16 w-16 rounded-full"
                       src={user.photoURL}
                       alt="user_photo"
                     />

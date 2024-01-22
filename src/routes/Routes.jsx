@@ -9,6 +9,7 @@ import EmployeeHome from "../Pages/Dashboard/EmployeeHome/EmployeeHome";
 import CustomRequest from "../Pages/Dashboard/EmployeeHome/CustomRequest/CustomRequest";
 import CustomDetails from "../Pages/Dashboard/EmployeeHome/CustomDetails/CustomDetails";
 import EmployeeList from "../Pages/Dashboard/Admin/EmployeeList/EmployeeList";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -39,7 +40,7 @@ export const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       // normal employee related routes
       {

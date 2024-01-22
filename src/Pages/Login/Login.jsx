@@ -1,64 +1,83 @@
-import { Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography, createTheme } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+  createTheme,
+} from "@mui/material";
 import { useContext } from "react";
 import { ThemeProvider } from "styled-components";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 const defaultTheme = createTheme();
 
 const Login = () => {
-    const {login,googleLogin} = useContext(AuthContext)
-    const navigate = useNavigate();
+  const { login, googleLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
+  const from = location.state?.from?.pathname || "/";
 
-
-     //google login
-     const  handleGoogleLogin =()=>{
-        googleLogin()
-        .then(result=>{
-          console.log(result.user);
+  //google login
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        console.log(result.user);
+        const employeeInfo = {
+          name: result.user?.displayName,
+          email: result.user?.email,
+          image: result.user?.photoURL,
+        };
+        axiosSecure.post("/employees", employeeInfo).then((res) => {
+          console.log(res.data);
           Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Account login successfully",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
-          navigate('/')
-        })
-        .catch(error=> console.log(error))
+          navigate(from, { replace: true });
+        });
+      })
+      .catch((error) => console.log(error));
+  };
 
-      }
-
-
- const handleLogin = (event)=>{
+  const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email,password);
+    console.log(email, password);
 
     // login
-    login(email,password)
-    .then(result=>{
+    login(email, password)
+      .then((result) => {
         console.log(result.user);
         Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Successfully login",
-            showConfirmButton: false,
-            timer: 1500
-          });
-          navigate('/')
-    })
-    .catch(error=>{
+          position: "top-end",
+          icon: "success",
+          title: "Successfully login",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
         console.log(error);
-    })
- }
-    
-    return (
-        <div className="pt-20">
-        <ThemeProvider theme={defaultTheme}>
+      });
+  };
+
+  return (
+    <div className="pt-20">
+      <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <Box
@@ -81,7 +100,6 @@ const Login = () => {
               noValidate
               sx={{ mt: 1 }}
             >
-             
               <TextField
                 margin="normal"
                 required
@@ -102,7 +120,7 @@ const Login = () => {
                 id="password"
                 autoComplete="current-password"
               />
-              
+
               <Button
                 type="submit"
                 fullWidth
@@ -116,16 +134,22 @@ const Login = () => {
                   <p>
                     Dont have an account? <Link href="/employee">Sign Up</Link>
                   </p>
-                  <Button onClick={handleGoogleLogin} variant="contained" sx={{my:2}} >Google</Button>
+                  <Button
+                    onClick={handleGoogleLogin}
+                    variant="contained"
+                    sx={{ my: 2 }}
+                  >
+                    Google
+                  </Button>
                 </Grid>
               </Grid>
               <br />
             </Box>
           </Box>
         </Container>
-        </ThemeProvider>
-        </div>
-    );
+      </ThemeProvider>
+    </div>
+  );
 };
 
 export default Login;
