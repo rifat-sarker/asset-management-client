@@ -10,6 +10,7 @@ import CustomRequest from "../Pages/Dashboard/EmployeeHome/CustomRequest/CustomR
 import CustomDetails from "../Pages/Dashboard/EmployeeHome/CustomDetails/CustomDetails";
 import EmployeeList from "../Pages/Dashboard/Admin/EmployeeList/EmployeeList";
 import PrivateRoute from "./PrivateRoute";
+import AddAsset from "../Pages/Dashboard/Admin/AddAsset/AddAsset";
 
 
 
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: "employeeList",
         element: <EmployeeList></EmployeeList>,
+      },
+      {
+        path: "addAsset",
+        element:<AddAsset></AddAsset>,
       },
     
     

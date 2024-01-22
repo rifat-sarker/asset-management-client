@@ -3,51 +3,50 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const CustomRequest = () => {
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const { register, handleSubmit } = useForm();
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     // console.log(data);
 
-    const customReq = await axiosSecure.post('/custom', data )
+    const customReq = await axiosSecure.post("/custom", data);
     console.log(customReq.data);
-    if(customReq.data.insertedId){
+    if (customReq.data.insertedId) {
       Swal.fire({
         position: "top-right",
         icon: "success",
         title: "Custom request added",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
     }
-    
   };
 
   return (
     <div>
       <form className="w-3/4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-6">
-        <label className="form-control w-full my-6">
-          <div className="label">
-            <span className="label-text">Asset Name</span>
-          </div>
-          <input
-            type="text"
-            {...register("asset_name", { required: true })}
-            placeholder="Asset Name"
-            className="input input-bordered  w-full"
-          />
-        </label>
-        <label className="form-control w-full my-6">
-          <div className="label">
-            <span className="label-text">Asset Image</span>
-          </div>
-          <input
-            type="text"
-            {...register("asset_image", { required: true })}
-            placeholder="Asset image"
-            className="input input-bordered  w-full"
-          />
-        </label>
+          <label className="form-control w-full my-6">
+            <div className="label">
+              <span className="label-text">Asset Name</span>
+            </div>
+            <input
+              type="text"
+              {...register("asset_name", { required: true })}
+              placeholder="Asset Name"
+              className="input input-bordered  w-full"
+            />
+          </label>
+          <label className="form-control w-full my-6">
+            <div className="label">
+              <span className="label-text">Asset Image</span>
+            </div>
+            <input
+              type="text"
+              {...register("asset_image", { required: true })}
+              placeholder="Asset image"
+              className="input input-bordered  w-full"
+            />
+          </label>
         </div>
         <div className="flex gap-6">
           {/* type */}

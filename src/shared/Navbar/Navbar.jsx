@@ -24,10 +24,10 @@ const Navbar = () => {
               <Link to="/"> Asset List</Link>
             </li>
             <li>
-              <Link to="/">Add an Asset </Link>
+              <Link to="/dashboard/addAsset">Add an Asset </Link>
             </li>
             <li>
-              <Link to="/">All Requests</Link>
+              <Link to="/dashboard/">All Requests</Link>
             </li>
             <li>
               <Link to="">Custom Requests List</Link>
