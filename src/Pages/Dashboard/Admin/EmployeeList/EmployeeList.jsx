@@ -16,23 +16,23 @@ const EmployeeList = () => {
   });
 
 
-  const handleDeleteUser =(employee)=>{
+  const handleDeleteEmployee =(employee)=>{
     Swal.fire({
-        title: "Are you sure?",
+        title: "Remove from the team?",
         text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, remove",
       }).then((result) => {
         if (result.isConfirmed) {
-          axiosSecure.delete(`/users/${user._id}`).then((res) => {
+          axiosSecure.delete(`/employees/${employee._id}`).then((res) => {
             if (res.data.deletedCount > 0) {
               refetch();
               Swal.fire({
                 title: "Deleted!",
-                text: "Your file has been deleted.",
+                text: "Employee has been remove from the Team.",
                 icon: "success",
               });
             }
@@ -40,6 +40,24 @@ const EmployeeList = () => {
         }
       });
   }
+
+  const handleMakeAdmin = (employee)=>{
+    axiosSecure.patch(`/employees/${employee._id}`)
+    .then(res=>{
+      console.log(res.data);
+      if(res.data.modifiedCount > 0){
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",                      
+          title: `${employee.name} is an admin Now`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    })
+  }
+
   return (
     <div className="mt-12">
       <h1 className="text-4xl text-center my-12">My Employee List</h1>
@@ -73,10 +91,19 @@ const EmployeeList = () => {
                   </div>
                 </td>
                 <td>{employee.name}</td>
-                <td><FaUsers className="text-white text-2xl"></FaUsers></td>
+                <td>  {employee.role === "admin" ? (
+                    "Admin"
+                  ) : (
+                    <button
+                      onClick={() => handleMakeAdmin(employee)}
+                      className="btn btn-lg bg-orange-500"
+                    >
+                      <FaUsers className="text-white text-2xl"></FaUsers>
+                    </button>
+                  )} </td>
                 <th>
                 <button
-                    onClick={() => handleDeleteUser(employee)}
+                    onClick={() => handleDeleteEmployee(employee)}
                     className="btn btn-ghost btn-lg"
                   >
                     <FaTrash className="text-red-600"></FaTrash>
