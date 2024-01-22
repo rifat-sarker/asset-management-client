@@ -87,7 +87,6 @@ const EmployeeList = () => {
                         />
                       </div>
                     </div>
-                    <td></td>
                   </div>
                 </td>
                 <td>{employee.name}</td>

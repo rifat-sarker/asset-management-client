@@ -11,6 +11,8 @@ import CustomDetails from "../Pages/Dashboard/EmployeeHome/CustomDetails/CustomD
 import EmployeeList from "../Pages/Dashboard/Admin/EmployeeList/EmployeeList";
 import PrivateRoute from "./PrivateRoute";
 import AddAsset from "../Pages/Dashboard/Admin/AddAsset/AddAsset";
+import AdminRoute from "./AdminRoute";
+import AssetList from "../Pages/Dashboard/Admin/AssetList/AssetList";
 
 
 
@@ -60,11 +62,15 @@ export const router = createBrowserRouter([
       // admin related routes
       {
         path: "employeeList",
-        element: <EmployeeList></EmployeeList>,
+        element: <AdminRoute><EmployeeList></EmployeeList></AdminRoute>,
       },
       {
         path: "addAsset",
-        element:<AddAsset></AddAsset>,
+        element:<AdminRoute><AddAsset></AddAsset></AdminRoute>,
+      },
+      {
+        path: "assetList",
+        element:<AdminRoute><AssetList></AssetList></AdminRoute>,
       },
     
     
