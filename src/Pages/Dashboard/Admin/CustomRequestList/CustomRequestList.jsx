@@ -24,7 +24,7 @@ const CustomRequestList = () => {
             <div>
               <img
                 src={custom.asset_image}
-                className="max-w-sm rounded-lg shadow-2xl"
+                className="max-w-md rounded-lg shadow-2xl"
               />
             </div>
             <div>

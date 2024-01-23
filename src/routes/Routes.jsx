@@ -14,6 +14,8 @@ import AddAsset from "../Pages/Dashboard/Admin/AddAsset/AddAsset";
 import AdminRoute from "./AdminRoute";
 import AssetList from "../Pages/Dashboard/Admin/AssetList/AssetList";
 import CustomRequestList from "../Pages/Dashboard/Admin/CustomRequestList/CustomRequestList";
+import RequestAsset from "../Pages/Dashboard/Employee/RequestAsset/RequestAsset";
+import AdminHome from "../Pages/Dashboard/Admin/AdminHome/AdminHome";
 
 
 
@@ -55,12 +57,20 @@ export const router = createBrowserRouter([
         path: "employeeHome/:id",
         element: <CustomDetails></CustomDetails>
       },
+      {
+        path: "requestAsset",
+        element: <RequestAsset></RequestAsset>
+      },
       
       {
         path: "customRequest",
         element: <CustomRequest></CustomRequest>,
       },
       // admin related routes
+      {
+        path: "adminHome",
+        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>,
+      },
       {
         path: "employeeList",
         element: <AdminRoute><EmployeeList></EmployeeList></AdminRoute>,

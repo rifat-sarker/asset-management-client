@@ -71,7 +71,7 @@ const Navbar = () => {
               <Link to="/">My Team</Link>
             </li>
             <li>
-              <Link to="/">Request for an Asset</Link>
+              <Link to="/dashboard/requestAsset">Request for an Asset</Link>
             </li>
             <li>
               <Link to="/dashboard/customRequest">Make a custom request</Link>
@@ -82,7 +82,7 @@ const Navbar = () => {
                 <ul className=" menu dropdown-content z-[1] bg-base-100 rounded-box max-w-full">
                   <li>
                     <img
-                      className="h-16 w-16 rounded-full"
+                      className="h-16 w-20 rounded-full"
                       src={user.photoURL}
                       alt="user_photo"
                     />
