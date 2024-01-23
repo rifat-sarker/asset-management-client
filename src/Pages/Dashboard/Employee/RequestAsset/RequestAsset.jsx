@@ -1,36 +1,57 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const RequestAsset = () => {
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth();
- 
+  const { user } = useAuth();
+  const [productName, setProductName] = useState("");
+  const [sortBy, setSortBy] = useState("");
+  const [products, setProducts] = useState([]);
+
   const { data: requestAsset = [] } = useQuery({
-    queryKey: ["requestAsset"],
+    queryKey: ["requestAsset", productName, sortBy],
     queryFn: async () => {
-      const res = await axiosSecure.get("/products");
+      const res = await axiosSecure.get(
+        `/products?productName=${productName}&sortBy=${sortBy}`
+      );
       console.log(res.data);
+      setProducts(res.data);
       return res.data;
     },
   });
 
- 
-  const handleRequest = async (e, product_name, type) => {
+  const handleRequest = async (e, product_name, type, status) => {
     e.preventDefault();
     const additional_note = e.target.addInfo.value;
     console.log(additional_note, product_name, type);
-  
+
     const addRequest = {
-     additional_notes: additional_note,
+      additional_note,
       product_name,
-      type: type,
-      requester_name:user.displayName,
+      type,
+      status,
+      requester_name: user.displayName,
       requester_email: user.email,
-    }
-    const res = await axiosSecure.post('/requestAssets', addRequest)
+    };
+    const res = await axiosSecure.post("/requestAssets", addRequest);
     console.log(res.data);
-    return res.data;
+    if (res.data.insertedId) {
+      Swal.fire({
+        position: "top-right",
+        icon: "success",
+        title: "Request sent",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
+
+
+  const handleSortChange = (event) => {
+    setSortBy(event.target.value);
   };
 
   return (
@@ -38,6 +59,26 @@ const RequestAsset = () => {
       <h1 className="text-4xl text-center my-12">
         Total Request an Asset {requestAsset.length}
       </h1>
+      <div className="flex my-12 items-center justify-center gap-8">
+        <div>
+          <input
+            className="p-2 rounded-lg"
+            type="text"
+            name=""
+            value={productName}
+            onChange={(e) => setProductName(e.target.value)}
+            placeholder="Search by Product Name"
+            id=""
+          />
+        </div>
+        <div>
+          <select name="" className="p-2 rounded-lg" value={sortBy} onChange={handleSortChange} id="">
+            <option value="">Sort by Type</option>
+            <option value="returnable">Returnable</option>
+            <option value="nonreturnable">Nonreturnable</option>
+          </select>
+        </div>
+      </div>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -59,12 +100,12 @@ const RequestAsset = () => {
                 <td>{request.availability}</td>
                 <td>
                   {/* Open the modal using document.getElementById('ID').showModal() method */}
-                   <button 
+                  <button
                     className="btn"
                     onClick={() =>
                       document.getElementById("my_modal_5").showModal()
                     }
-                    disabled={request.availability === 'Out of Stock'}
+                    disabled={request.availability === "Out of Stock"}
                   >
                     Request
                   </button>
@@ -75,7 +116,12 @@ const RequestAsset = () => {
                     <div className="modal-box">
                       <form
                         onSubmit={(e) =>
-                          handleRequest(e, request.product_name, request.type)
+                          handleRequest(
+                            e,
+                            request.product_name,
+                            request.type,
+                            request.availability
+                          )
                         }
                       >
                         <label>Additional Notes</label>
