@@ -13,6 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import AddAsset from "../Pages/Dashboard/Admin/AddAsset/AddAsset";
 import AdminRoute from "./AdminRoute";
 import AssetList from "../Pages/Dashboard/Admin/AssetList/AssetList";
+import CustomRequestList from "../Pages/Dashboard/Admin/CustomRequestList/CustomRequestList";
 
 
 
@@ -71,6 +72,10 @@ export const router = createBrowserRouter([
       {
         path: "assetList",
         element:<AdminRoute><AssetList></AssetList></AdminRoute>,
+      },
+      {
+        path: "customRequestList",
+        element:<AdminRoute><CustomRequestList></CustomRequestList></AdminRoute>,
       },
     
     

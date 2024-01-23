@@ -30,7 +30,7 @@ const Navbar = () => {
               <Link to="/dashboard/">All Requests</Link>
             </li>
             <li>
-              <Link to="">Custom Requests List</Link>
+              <Link to="/dashboard/customRequestList">Custom Requests List</Link>
             </li>
             <li>
               <Link to="/dashboard/employeeList">My Employee List</Link>
