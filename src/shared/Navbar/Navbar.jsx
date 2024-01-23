@@ -65,7 +65,7 @@ const Navbar = () => {
               <Link to="/dashboard/employeeHome">Home</Link>
             </li>
             <li>
-              <Link to="/">My Assets</Link>
+              <Link to="/dashboard/myAssets">My Assets</Link>
             </li>
             <li>
               <Link to="/">My Team</Link>

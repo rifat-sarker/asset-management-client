@@ -16,6 +16,7 @@ import AssetList from "../Pages/Dashboard/Admin/AssetList/AssetList";
 import CustomRequestList from "../Pages/Dashboard/Admin/CustomRequestList/CustomRequestList";
 import RequestAsset from "../Pages/Dashboard/Employee/RequestAsset/RequestAsset";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome/AdminHome";
+import MyAsset from "../Pages/Dashboard/Employee/MyAsset/MyAsset";
 
 
 
@@ -60,6 +61,11 @@ export const router = createBrowserRouter([
       {
         path: "requestAsset",
         element: <RequestAsset></RequestAsset>
+      },
+      
+      {
+        path: "myAssets",
+        element: <MyAsset></MyAsset>
       },
       
       {

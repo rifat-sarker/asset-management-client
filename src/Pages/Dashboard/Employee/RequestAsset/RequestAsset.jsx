@@ -9,7 +9,7 @@ const RequestAsset = () => {
   const { user } = useAuth();
   const [productName, setProductName] = useState("");
   const [sortBy, setSortBy] = useState("");
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
 
   const { data: requestAsset = [] } = useQuery({
     queryKey: ["requestAsset", productName, sortBy],
@@ -18,21 +18,21 @@ const RequestAsset = () => {
         `/products?productName=${productName}&sortBy=${sortBy}`
       );
       console.log(res.data);
-      setProducts(res.data);
+      // setProducts(res.data);
       return res.data;
     },
   });
 
-  const handleRequest = async (e, product_name, type, status) => {
+  const handleRequest = async (e, productName, type, status) => {
     e.preventDefault();
     const additional_note = e.target.addInfo.value;
-    console.log(additional_note, product_name, type);
+    console.log(additional_note, productName, type);
 
     const addRequest = {
       additional_note,
-      product_name,
-      type,
-      status,
+      productName,
+      type: type,
+      status:status,
       requester_name: user.displayName,
       requester_email: user.email,
     };
@@ -118,8 +118,8 @@ const RequestAsset = () => {
                         onSubmit={(e) =>
                           handleRequest(
                             e,
-                            request.product_name,
                             request.type,
+                            request.product_name,
                             request.availability
                           )
                         }
