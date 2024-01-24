@@ -151,7 +151,7 @@ const Navbar = () => {
               <img
                 className="h-12  w-12 rounded-full"
                 src={
-                  "https://i.ibb.co/Q8pSG87/7580b4102141269-5f2fed6475b53.jpg"
+                  "https://i.ibb.co/pz1zdcq/logo.jpg"
                 }
                 alt=""
               />

@@ -4,7 +4,7 @@ const About = () => {
       <h2 className="text-5xl text-center font-bold my-12">About Us</h2>
       <div className="flex gap-24 p-4">
         <div>
-          <h3 className="text-4xl py-4 font-bold">About Sonexa</h3>
+          <h3 className="text-4xl py-4 font-bold">About Innovi</h3>
          <div className="flex gap-4">
          <button className="  my-2 px-8 btn-success btn btn-outline">contact us</button>
           <button className="my-2 px-8 btn-info btn btn-outline">Leadership</button>
@@ -12,16 +12,16 @@ const About = () => {
         </div>
         <div className="flex-wrap w-3/4">
           <p>
-            Sonexa began as sonexa Web Enterprises in 2011 with a mission to build
+            Innovi began as Innovi Web Enterprises in 2011 with a mission to build
             easy-to-use yet powerful cloud-based applications for organizations
             worldwide. Our team is passionate about delivering consistently
             amazing user experiences with best-in-class functionality and
-            enterprise scalability. sonexaO’s products help thousands of
+            enterprise scalability. InnoviO’s products help thousands of
             organizations around the globe streamline operations in many key
-            areas, including physical asset management with sonexaOfficeInventory,
-            IT asset management with sonexaO AssetSonar, equipment maintenance
-            management with sonexaO CMMS and rental business management with
-            sonexaRentOut.{" "}
+            areas, including physical asset management with InnoviOfficeInventory,
+            IT asset management with InnoviO AssetSonar, equipment maintenance
+            management with InnoviO CMMS and rental business management with
+            InnoviRentOut.{" "}
           </p>
           <br />
 
