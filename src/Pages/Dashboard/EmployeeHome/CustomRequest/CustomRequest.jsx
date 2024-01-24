@@ -1,14 +1,27 @@
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAuth from "../../../../hooks/useAuth";
 
 const CustomRequest = () => {
   const axiosSecure = useAxiosSecure();
+  const {user} = useAuth()
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    // console.log(data);
+    console.log(data);
 
-    const customReq = await axiosSecure.post("/custom", data);
+    const customInfo = {
+      asset_name:data.asset_name,
+      asset_image: data.asset_image,
+      type: data.type,
+      price: data.price,
+      additional_info:data.additional_info,
+      why_need_this: data.why_need_this,
+      requester_email: user.email,
+      requester_name: user.displayName,
+    }
+
+    const customReq = await axiosSecure.post("/custom", customInfo);
     console.log(customReq.data);
     if (customReq.data.insertedId) {
       Swal.fire({
