@@ -13,6 +13,15 @@ const EmployeeHome = () => {
     },
   });
 
+  const { data: monthlyRequest = [] } = useQuery({
+    queryKey: ["monthlyRequest"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/requestAssets");
+      console.log(res.data);
+      return res.data;
+    },
+  });
+
   if (isLoading) {
     return <p>loading..</p>;
   }
@@ -61,21 +70,65 @@ const EmployeeHome = () => {
       {/* My Pending request */}
       <section>
         <h1 className="text-4xl text-center my-8">My Pending Request</h1>
+        <div className="overflow-x-auto mx-auto w-3/4">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr className="text-xl">
+                <th>#</th>
+                <th>Asset Name </th>
+                <th>Type</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {monthlyRequest.map((item, idx) => (
+                <tr key={item._id}>
+                  <th>{idx + 1}</th>
+                  <td>{item.product_name}</td>
+                  <td>{item.type}</td>
+                  <td>Pending</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* My Monthly Request */}
-      <section  className="text-center">
+      <section  className="text-center my-20">
         <h1 className="text-4xl text-center my-8">My Monthly Request</h1>
-        <h3>
-          Show all requests made by the user in this month, show them in sorted
-          order: recent one will be first
-        </h3>
+        <div className="overflow-x-auto mx-auto w-3/4">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr className="text-xl">
+                <th>#</th>
+                <th>Asset Name </th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Request Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {monthlyRequest.map((item, idx) => (
+                <tr key={item._id}>
+                  <th>{idx + 1}</th>
+                  <td>{item.product_name}</td>
+                  <td>{item.type}</td>
+                  <td>{item.status}</td>
+                  <td>{item.request_date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
 
       {/* Frequently requested items */}
       <section>
-        <h1 className="text-4xl text-center my-8">Frequently requested items (max: 4 items)</h1>
+        <h1 className="text-4xl text-center my-8">TODO: Frequently requested items (max: 4 items)</h1>
       </section>
     </div>
   );

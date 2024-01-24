@@ -9,6 +9,8 @@ const RequestAsset = () => {
   const { user } = useAuth();
   const [productName, setProductName] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const [additionalNote, setAdditionalNote] = useState("");
+  const [currentRequest, setCurrentRequest] = useState(null);
   // const [products, setProducts] = useState([]);
 
   const { data: requestAsset = [] } = useQuery({
@@ -23,19 +25,31 @@ const RequestAsset = () => {
     },
   });
 
-  const handleRequest = async (e, productName, type, status) => {
-    e.preventDefault();
-    const additional_note = e.target.addInfo.value;
-    console.log(additional_note, productName, type);
+  const handleRequest = async () => {
+    // e.preventDefault();
+    // const additional_note = e.target.addInfo.value;
+    // console.log(additionalNote, productName, type);
+
+    if (currentRequest) {
+      console.log(
+        additionalNote,
+        currentRequest.type,
+        currentRequest.product_name,
+        currentRequest.availability
+      );
+    }
+
+    document.getElementById("my_modal_5").close();
 
     const addRequest = {
-      additional_note,
-      productName,
-      type: type,
-      status:status,
+      additional_note: additionalNote,
+      product_name: currentRequest.product_name,
+      type: currentRequest.type,
+      status: currentRequest.availability,
       requester_name: user.displayName,
       requester_email: user.email,
     };
+
     const res = await axiosSecure.post("/requestAssets", addRequest);
     console.log(res.data);
     if (res.data.insertedId) {
@@ -49,6 +63,9 @@ const RequestAsset = () => {
     }
   };
 
+  const handleTextAreaChange = (e) => {
+    setAdditionalNote(e.target.value);
+  };
 
   const handleSortChange = (event) => {
     setSortBy(event.target.value);
@@ -72,7 +89,13 @@ const RequestAsset = () => {
           />
         </div>
         <div>
-          <select name="" className="p-2 rounded-lg" value={sortBy} onChange={handleSortChange} id="">
+          <select
+            name=""
+            className="p-2 rounded-lg"
+            value={sortBy}
+            onChange={handleSortChange}
+            id=""
+          >
             <option value="">Sort by Type</option>
             <option value="returnable">Returnable</option>
             <option value="nonreturnable">Nonreturnable</option>
@@ -99,12 +122,12 @@ const RequestAsset = () => {
                 <td>{request.type}</td>
                 <td>{request.availability}</td>
                 <td>
-                  {/* Open the modal using document.getElementById('ID').showModal() method */}
                   <button
                     className="btn"
-                    onClick={() =>
-                      document.getElementById("my_modal_5").showModal()
-                    }
+                    onClick={() => {
+                      setCurrentRequest(request);
+                      document.getElementById("my_modal_5").showModal();
+                    }}
                     disabled={request.availability === "Out of Stock"}
                   >
                     Request
@@ -115,18 +138,16 @@ const RequestAsset = () => {
                   >
                     <div className="modal-box">
                       <form
-                        onSubmit={(e) =>
-                          handleRequest(
-                            e,
-                            request.type,
-                            request.product_name,
-                            request.availability
-                          )
-                        }
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          handleRequest();
+                        }}
                       >
                         <label>Additional Notes</label>
                         <br /> <br />
                         <textarea
+                          value={additionalNote}
+                          onChange={handleTextAreaChange}
                           className="rounded-lg p-4"
                           name="addInfo"
                           id="addInfo"
@@ -135,11 +156,9 @@ const RequestAsset = () => {
                         ></textarea>{" "}
                         <br />
                         <button className="btn">Request</button>
-                        {/* onClick={(e)=>handleRequest(e,request._id,request.product_name)} */}
                       </form>
                       <div className="modal-action">
                         <form method="dialog">
-                          {/* if there is a button in form, it will close the modal */}
                           <button className="btn">Close</button>
                         </form>
                       </div>
