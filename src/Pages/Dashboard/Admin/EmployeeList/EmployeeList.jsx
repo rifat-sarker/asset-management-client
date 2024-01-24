@@ -61,7 +61,7 @@ const EmployeeList = () => {
   return (
     <div className="mt-12">
       <h1 className="text-4xl text-center my-12">My Employee List</h1>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto flex ">
         <table className="table">
           {/* head */}
           <thead>

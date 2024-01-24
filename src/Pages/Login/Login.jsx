@@ -33,7 +33,7 @@ const Login = () => {
         const employeeInfo = {
           name: result.user?.displayName,
           email: result.user?.email,
-          image: result.user?.photoURL,
+          // image: result.user?.photoURL,
         };
         axiosSecure.post("/employees", employeeInfo).then((res) => {
           console.log(res.data);
