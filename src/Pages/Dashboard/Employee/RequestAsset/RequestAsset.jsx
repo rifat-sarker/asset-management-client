@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const RequestAsset = () => {
   const axiosSecure = useAxiosSecure();
@@ -73,6 +74,9 @@ const RequestAsset = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Asset Management System | Request for an Asset</title>
+      </Helmet>
       <h1 className="text-4xl text-center my-12">
         Total Request an Asset {requestAsset.length}
       </h1>

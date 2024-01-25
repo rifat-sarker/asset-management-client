@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 const defaultTheme = createTheme();
 
 const AdminSignUp = () => {
@@ -68,6 +69,9 @@ const AdminSignUp = () => {
   }
   return (
     <div className="pt-20">
+      <Helmet>
+        <title>Asset Management System | Join as Admin</title>
+      </Helmet>
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />

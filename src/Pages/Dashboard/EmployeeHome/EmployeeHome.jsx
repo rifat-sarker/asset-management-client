@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const EmployeeHome = () => {
   const axiosSecure = useAxiosSecure();
@@ -28,6 +29,9 @@ const EmployeeHome = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Asset Management System | Employee Home</title>
+      </Helmet>
       {/* my custom request section */}
       <div className="my-12">
         <h1 className="text-4xl text-center mb-8">My Custom Requests</h1>

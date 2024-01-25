@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { FaTrash, FaUsers } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const EmployeeList = () => {
   const axiosSecure = useAxiosSecure();
@@ -60,6 +61,9 @@ const EmployeeList = () => {
 
   return (
     <div className="mt-12">
+      <Helmet>
+        <title>Asset Management System | My Employee List</title>
+      </Helmet>
       <h1 className="text-4xl text-center my-12">My Employee List</h1>
       <div className="overflow-x-auto flex ">
         <table className="table">

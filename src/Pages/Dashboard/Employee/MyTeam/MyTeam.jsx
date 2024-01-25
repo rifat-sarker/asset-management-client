@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const MyTeam = () => {
   const axiosSecure = useAxiosSecure();
@@ -41,6 +42,9 @@ const MyTeam = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Asset Management System | My Team</title>
+      </Helmet>
       <h1 className="text-4xl text-center my-12">Upcoming Events</h1>
       <div className="overflow-x-auto">
         <table className="table text-center">

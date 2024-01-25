@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const MyAsset = () => {
   const axiosSecure = useAxiosSecure();
@@ -21,6 +22,9 @@ const MyAsset = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Asset Management System | My Asset</title>
+      </Helmet>
       <h2 className="text-4xl text-center my-12">
         My Asset Page : {myAssets.length}
       </h2>

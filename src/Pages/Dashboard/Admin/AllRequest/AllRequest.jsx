@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
+import { useState } from "react";
 
 const AllRequest = () => {
   const axiosSecure = useAxiosSecure();
+  const [searchProduct, setSearchProduct] = useState("");
 
   const { data: allRequest = [] } = useQuery({
     queryKey: ["allRequest"],
@@ -12,16 +15,30 @@ const AllRequest = () => {
     },
   });
 
-  const { data: customRequest = [] } = useQuery({
-    queryKey: ["customRequest"],
-    queryFn: async () => {
-      const res = await axiosSecure("/custom");
-      return res.data;
-    },
-  });
+  const filterProduct = allRequest.filter((product) =>
+    product.requester_name
+      .toLowerCase()
+      .includes(searchProduct.toLocaleLowerCase())
+  );
+
   return (
     <div>
+      <Helmet>
+        <title>Asset Management System | All Request</title>
+      </Helmet>
       <h1 className="text-4xl text-center my-12">All Request</h1>
+      {/* Search Product by requester  name */}
+      <div className="text-center my-8">
+        <button className="btn mr-4 ">Search Product by requester  name</button>
+        <input
+          value={searchProduct}
+          onChange={(e) => setSearchProduct(e.target.value)}
+          className=" py-3 rounded-lg px-2"
+          type="text"
+          name="product_name"
+          id="name"
+        />{" "}
+      </div>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -39,7 +56,7 @@ const AllRequest = () => {
             </tr>
           </thead>
           <tbody>
-            {allRequest.map((request, idx) => (
+            {filterProduct.map((request, idx) => (
               <tr key={request._id}>
                 <th>{request.product_name}</th>
                 <td>{request.type}</td>
@@ -48,24 +65,6 @@ const AllRequest = () => {
                 <td>{request.request_date}</td>
                 <td>{request.additional_note}</td>
                 <td>{request.status}</td>
-                <td>
-                  <button className="btn">Approve</button>
-                </td>
-                <td>
-                  <button className="btn">Reject</button>
-                </td>
-              </tr>
-            ))}
-            {customRequest.map((custom, idx) => (
-              <tr key={custom._id}>
-                
-                <td>{custom.asset_name}</td>
-                <td>{custom.type}</td>
-                <td>{custom.requester_email}</td>
-                <td>{custom.requester_name}</td>
-                <td>{custom.request_date}</td>
-                <td>Not found</td>
-                <td>Available</td>
                 <td>
                   <button className="btn">Approve</button>
                 </td>

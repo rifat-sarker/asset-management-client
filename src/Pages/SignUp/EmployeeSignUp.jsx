@@ -16,12 +16,13 @@ import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 const defaultTheme = createTheme();
 
 const EmployeeSignUp = () => {
   const { createUser, updateUserProfile, googleLogin } =
     useContext(AuthContext);
-  const [registerError, setRegisterError] = useState("");
+  // const [registerError, setRegisterError] = useState("");
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
 
@@ -96,6 +97,9 @@ const EmployeeSignUp = () => {
 
   return (
     <div className="pt-20">
+      <Helmet>
+        <title>Asset Management System | Join as Employee</title>
+      </Helmet>
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />

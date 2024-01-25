@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const CustomRequestList = () => {
   const axiosSecure = useAxiosSecure();
@@ -14,6 +15,9 @@ const CustomRequestList = () => {
   });
   return (
     <div>
+      <Helmet>
+        <title>Asset Management System | Custom Request List</title>
+      </Helmet>
       <h1 className="text-4xl my-12 text-center">
         Custom Request List {customReqList.length}
       </h1>

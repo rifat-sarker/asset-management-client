@@ -3,10 +3,11 @@ import { FaEdit } from "react-icons/fa";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const AssetList = () => {
   const axiosSecure = useAxiosSecure();
-  const [searchProduct, setProduct] = useState("");
+  const [searchProduct, setSearchProduct] = useState("");
   const [productType, setProductType] = useState("type");
   const [sortByQuantity, setSortByQuantity] = useState("");
 
@@ -35,6 +36,9 @@ const AssetList = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Asset Management System | AssetList</title>
+      </Helmet>
       <h1 className="text-4xl text-center my-12">Asset List</h1>
       <div className="text-center justify-center items-center lg:flex gap-8 mb-12">
         {/* Search Product by name */}
@@ -42,7 +46,7 @@ const AssetList = () => {
           <button className="btn mr-4 ">Search Product by name</button>
           <input
             value={searchProduct}
-            onChange={(e) => setProduct(e.target.value)}
+            onChange={(e) => setSearchProduct(e.target.value)}
             className=" py-3 rounded-lg px-2"
             type="text"
             name="product_name"

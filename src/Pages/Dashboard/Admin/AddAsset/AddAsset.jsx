@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const AddAsset = () => {
   const { register, handleSubmit,reset } = useForm();
@@ -23,6 +24,9 @@ const AddAsset = () => {
   };
   return (
     <div className="my-12">
+      <Helmet>
+        <title>Asset Management System | Add an Asset</title>
+      </Helmet>
       <h1 className="text-4xl text-center font-bold">Add an Asset</h1>
       <div>
         <form className="w-3/4 mx-auto" onSubmit={handleSubmit(onSubmit)}>

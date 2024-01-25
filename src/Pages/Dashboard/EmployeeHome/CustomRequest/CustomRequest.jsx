@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const CustomRequest = () => {
   const axiosSecure = useAxiosSecure();
@@ -36,6 +37,9 @@ const CustomRequest = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Asset Management System | Make a custom Request</title>
+      </Helmet>
       <form className="w-3/4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-6">
           <label className="form-control w-full my-6">
