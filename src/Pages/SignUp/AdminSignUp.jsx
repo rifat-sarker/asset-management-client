@@ -41,9 +41,12 @@ const AdminSignUp = () => {
             email: email,
             dob,
             image,
+            logo,
+            packages,
+            // role:'admin'
             }
 
-          axiosSecure.post('/employees', adminInfo)
+          axiosSecure.post('/admin', adminInfo)
           .then(res=>{
             console.log(res.data);
             if(res.data.insertedId){
@@ -54,7 +57,7 @@ const AdminSignUp = () => {
                 showConfirmButton: false,
                 timer: 1500
               });
-              navigate('/adminHome')
+              navigate('/dashboard/adminHome')
             }
           })
         })

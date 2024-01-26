@@ -37,7 +37,7 @@ const Navbar = () => {
               <Link to="/dashboard/employeeList">My Employee List</Link>
             </li>
             <li>
-              <Link to="">Add an Employee</Link>
+              <Link to="/dashboard/addEmployee">Add an Employee</Link>
             </li>
             <li>
               <details className="">

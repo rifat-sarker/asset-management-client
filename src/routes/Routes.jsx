@@ -19,6 +19,9 @@ import AdminHome from "../Pages/Dashboard/Admin/AdminHome/AdminHome";
 import MyAsset from "../Pages/Dashboard/Employee/MyAsset/MyAsset";
 import MyTeam from "../Pages/Dashboard/Employee/MyTeam/MyTeam";
 import AllRequest from "../Pages/Dashboard/Admin/AllRequest/AllRequest";
+import AddEmployee from "../Pages/Dashboard/Admin/AddEmployee/AddEmployee";
+import Payment from "../Pages/Dashboard/Admin/Payment/Payment";
+import PaymentPage from "../Pages/Dashboard/Admin/Payment/PaymentPage";
 
 
 
@@ -104,8 +107,18 @@ export const router = createBrowserRouter([
         path: "customRequestList",
         element:<AdminRoute><CustomRequestList></CustomRequestList></AdminRoute>,
       },
-    
-    
+      {
+        path: "addEmployee",
+        element:<AdminRoute><AddEmployee></AddEmployee></AdminRoute>,
+      },
+      {
+        path: "payment",
+        element:<AdminRoute><Payment></Payment></AdminRoute>,
+      },
+      {
+        path: "paymentPage",
+        element:<AdminRoute><PaymentPage></PaymentPage></AdminRoute>,
+      },
       
     ]
   }

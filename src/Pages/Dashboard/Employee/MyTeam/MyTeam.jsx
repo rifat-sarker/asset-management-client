@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { useState } from "react";
 import { Helmet } from "react-helmet";
 
 const MyTeam = () => {
