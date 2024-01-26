@@ -5,8 +5,8 @@ import useAuth from "../../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
-const CheckoutForm = ({ selectedId }) => {
-  const { user } = useAuth();
+const CheckoutForm = ({selectedId}) => {
+  const { user,memberCount,setMemberCount,setPackageLimit,packageLimit } = useAuth();
   const stripe = useStripe();
   const [transactionId, setTransactionId] = useState("");
   const elements = useElements();
@@ -14,9 +14,10 @@ const CheckoutForm = ({ selectedId }) => {
   const [clientSecret, setClientSecret] = useState("");
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
-  // console.log(selectedId.price);
+  console.log(selectedId);
 
   const PackagePrice = selectedId.price;
+  console.log(PackagePrice);
 
   useEffect(() => {
    if(PackagePrice > 0){
@@ -76,7 +77,10 @@ const CheckoutForm = ({ selectedId }) => {
           transactionId: paymentIntent.id,
           date: new Date(),
           status: "pending",
+          paymentAmount: PackagePrice,
+
         };
+        console.log(payment);
         const res = await axiosSecure.post("/payments", payment);
         console.log("Payment saved", res.data);
         if (res.data?.insertedId) {
@@ -87,6 +91,24 @@ const CheckoutForm = ({ selectedId }) => {
             showConfirmButton: false,
             timer: 1500,
           });
+
+
+          setMemberCount(memberCount + selectedId.maxEmployees)
+          setPackageLimit(packageLimit + selectedId.maxEmployees)
+
+
+     localStorage.setItem('storeMemberCount',parseInt(selectedId.maxEmployees) + parseInt(localStorage.getItem('storeMemberCount') || 0 ) )
+
+        
+      
+     
+
+
+
+          // // update member count and package limit
+          // setMemberCount((previousCount)=> previousCount + selectedId.maxEmployees)
+          // setPackageLimit((previousLimit)=> previousLimit + selectedId.maxEmployees)
+
           navigate("/dashboard/addEmployee");
         }
       }

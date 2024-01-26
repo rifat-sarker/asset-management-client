@@ -1,6 +1,9 @@
+
 import { Link } from "react-router-dom";
 
 const Payment = () => {
+ 
+
   const cards = [
     {
       id: 1,

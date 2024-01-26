@@ -9,7 +9,7 @@ const EmployeeHome = () => {
     queryKey: ["customRequest"],
     queryFn: async () => {
       const res = await axiosSecure.get("/custom");
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });
@@ -18,7 +18,7 @@ const EmployeeHome = () => {
     queryKey: ["monthlyRequest"],
     queryFn: async () => {
       const res = await axiosSecure.get("/requestAssets");
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });

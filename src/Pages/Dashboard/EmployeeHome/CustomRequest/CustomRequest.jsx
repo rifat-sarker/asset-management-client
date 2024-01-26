@@ -9,7 +9,7 @@ const CustomRequest = () => {
   const {user} = useAuth()
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
 
     const customInfo = {
       asset_name:data.asset_name,
@@ -23,7 +23,7 @@ const CustomRequest = () => {
     }
 
     const customReq = await axiosSecure.post("/custom", customInfo);
-    console.log(customReq.data);
+    // console.log(customReq.data);
     if (customReq.data.insertedId) {
       Swal.fire({
         position: "top-right",

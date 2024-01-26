@@ -22,6 +22,12 @@ const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const [price,setPrice] = useState('')
 
+  const [memberCount, setMemberCount] = useState(0);
+  const [packageLimit, setPackageLimit] = useState(0);
+
+
+
+
   //create user
   const createUser = (email, password) => {
     setLoading(true);
@@ -84,6 +90,10 @@ const AuthProvider = ({ children }) => {
     googleLogin,
     logOut,
     updateUserProfile,
+    memberCount,
+    setMemberCount,
+    packageLimit,
+    setPackageLimit,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

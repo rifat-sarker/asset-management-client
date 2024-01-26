@@ -12,7 +12,7 @@ const MyAsset = () => {
     queryKey: ["myAssets",productName, sortBy],
     queryFn: async () => {
       const res = await axiosSecure.get(`/requestAssets?productName=${productName}&sortBy=${sortBy}`);
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });

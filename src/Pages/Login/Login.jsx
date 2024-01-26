@@ -17,12 +17,14 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const defaultTheme = createTheme();
 
 const Login = () => {
   const { login, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   const from = location.state?.from?.pathname || "/";
 
@@ -36,7 +38,7 @@ const Login = () => {
           email: result.user?.email,
           // image: result.user?.photoURL,
         };
-        axiosSecure.post("/employees", employeeInfo).then((res) => {
+        axiosPublic.post("/employees", employeeInfo).then((res) => {
           console.log(res.data);
           Swal.fire({
             position: "top-end",

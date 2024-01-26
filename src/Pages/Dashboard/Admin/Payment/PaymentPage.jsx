@@ -31,7 +31,8 @@ const PaymentPage = () => {
   return (
     <div className="w-1/2 mt-12 mx-auto">
       <Elements stripe={stripePromise} >
-        <CheckoutForm selectedId={selectedId}></CheckoutForm>
+        <CheckoutForm selectedId={selectedId}
+        ></CheckoutForm>
       </Elements>
     </div>
   );

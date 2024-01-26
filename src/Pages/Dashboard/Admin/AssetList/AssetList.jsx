@@ -15,7 +15,7 @@ const AssetList = () => {
     queryKey: ["assetList"],
     queryFn: async () => {
       const res = await axiosSecure.get("/products");
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });

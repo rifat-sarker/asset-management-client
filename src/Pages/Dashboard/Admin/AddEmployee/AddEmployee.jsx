@@ -2,8 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 
-const AddEmployee = () => {
+import useAuth from "../../../../hooks/useAuth";
+
+const AddEmployee = ( ) => {
   const axiosSecure = useAxiosSecure();
+  const {memberCount, packageLimit} = useAuth()
+
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -11,14 +15,19 @@ const AddEmployee = () => {
       return res.data;
     },
   });
+
+  const member = localStorage.getItem('storeMemberCount')
+  
   return (
     <div className="my-12">
       <h1 className="text-4xl text-center font-bold my-8">Add a Employee!</h1>
       <div className="flex gap-6 justify-center">
-        <button  className="btn">All member count : 0 </button>
+        <button  className="btn">All member count : {member} </button>
         <div className="flex gap-6">
-          <button className="btn">Package limit : 0 </button>
+          <button className="btn">Package limit : {member
+          } </button>
           <Link to='/dashboard/payment'><button className="btn">Increase limit</button></Link>
+          {/* <Link to={`/dashboard/payment/${selectedId.id}`}><button className="btn">Increase limit</button></Link> */}
         </div>
       </div>
       <div className="overflow-x-auto">

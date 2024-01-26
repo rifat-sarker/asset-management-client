@@ -61,7 +61,7 @@ const EmployeeSignUp = () => {
     const image = form.image.value;
     const password = form.password.value;
     const dob = form.dob.value;
-    console.log(name, email, password, dob, image);
+    // console.log(name, email, password, dob, image);
 
     //signup
     createUser(email, password)

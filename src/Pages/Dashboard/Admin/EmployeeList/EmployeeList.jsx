@@ -11,7 +11,7 @@ const EmployeeList = () => {
     queryKey: ["employees"],
     queryFn: async () => {
       const res = await axiosSecure.get("/employees");
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });
@@ -45,7 +45,7 @@ const EmployeeList = () => {
   const handleMakeAdmin = (employee)=>{
     axiosSecure.patch(`/employees/${employee._id}`)
     .then(res=>{
-      console.log(res.data);
+      // console.log(res.data);
       if(res.data.modifiedCount > 0){
         refetch();
         Swal.fire({
