@@ -15,7 +15,7 @@ const AddEmployee = () => {
     <div className="my-12">
       <h1 className="text-4xl text-center font-bold my-8">Add a Employee!</h1>
       <div className="flex gap-6 justify-center">
-        <button className="btn">All user count : 0 </button>
+        <button  className="btn">All member count : 0 </button>
         <div className="flex gap-6">
           <button className="btn">Package limit : 0 </button>
           <Link to='/dashboard/payment'><button className="btn">Increase limit</button></Link>

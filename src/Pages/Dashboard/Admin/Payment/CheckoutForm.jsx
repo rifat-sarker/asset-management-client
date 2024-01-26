@@ -1,11 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ selectedId }) => {
   const { user } = useAuth();
   const stripe = useStripe();
   const [transactionId, setTransactionId] = useState("");
@@ -14,6 +14,18 @@ const CheckoutForm = () => {
   const [clientSecret, setClientSecret] = useState("");
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+  // console.log(selectedId.price);
+
+  const PackagePrice = selectedId.price;
+
+  useEffect(() => {
+   if(PackagePrice > 0){
+    axiosSecure.post("/create-payment-intent", {price:PackagePrice}).then((res) => {
+      console.log(res.data);
+      setClientSecret(res.data.clientSecret);
+    });
+   }
+  }, [axiosSecure, PackagePrice]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,7 +61,7 @@ const CheckoutForm = () => {
           },
         },
       });
-      
+
     if (confirmError) {
       console.log("confirmError");
     } else {
@@ -62,21 +74,21 @@ const CheckoutForm = () => {
         const payment = {
           email: user.email,
           transactionId: paymentIntent.id,
-          date: new Date(), 
+          date: new Date(),
           status: "pending",
         };
         const res = await axiosSecure.post("/payments", payment);
         console.log("Payment saved", res.data);
-        if (res.data?.paymentResult?.insertedId) {
+        if (res.data?.insertedId) {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Thank you for taka poisa",
+            title: "Thank you for Purchage Package",
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate("/dashboard/addEmployee");
         }
-        navigate("/dashboard/paymentHistory");
       }
     }
   };
@@ -88,7 +100,7 @@ const CheckoutForm = () => {
             style: {
               base: {
                 fontSize: "16px",
-                color: "#424770",
+                color: "gray",
                 "::placeholder": {
                   color: "#aab7c4",
                 },

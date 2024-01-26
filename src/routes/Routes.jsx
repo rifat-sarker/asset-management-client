@@ -116,7 +116,7 @@ export const router = createBrowserRouter([
         element:<AdminRoute><Payment></Payment></AdminRoute>,
       },
       {
-        path: "paymentPage",
+        path: "paymentPage/:id",
         element:<AdminRoute><PaymentPage></PaymentPage></AdminRoute>,
       },
       
