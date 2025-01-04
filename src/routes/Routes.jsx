@@ -23,11 +23,6 @@ import AddEmployee from "../Pages/Dashboard/Admin/AddEmployee/AddEmployee";
 import Payment from "../Pages/Dashboard/Admin/Payment/Payment";
 import PaymentPage from "../Pages/Dashboard/Admin/Payment/PaymentPage";
 
-
-
-
-
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -52,33 +47,38 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: 'dashboard',
-    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       // normal employee related routes
+
       {
         path: "employeeHome",
         element: <EmployeeHome></EmployeeHome>,
       },
       {
         path: "employeeHome/:id",
-        element: <CustomDetails></CustomDetails>
+        element: <CustomDetails></CustomDetails>,
       },
       {
         path: "requestAsset",
-        element: <RequestAsset></RequestAsset>
+        element: <RequestAsset></RequestAsset>,
       },
-      
+
       {
         path: "myAssets",
-        element: <MyAsset></MyAsset>
+        element: <MyAsset></MyAsset>,
       },
-      
+
       {
         path: "myTeam",
-        element: <MyTeam></MyTeam>
+        element: <MyTeam></MyTeam>,
       },
-      
+
       {
         path: "customRequest",
         element: <CustomRequest></CustomRequest>,
@@ -86,41 +86,76 @@ export const router = createBrowserRouter([
       // admin related routes
       {
         path: "adminHome",
-        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
       },
       {
         path: "employeeList",
-        element: <AdminRoute><EmployeeList></EmployeeList></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <EmployeeList></EmployeeList>
+          </AdminRoute>
+        ),
       },
       {
         path: "allRequest",
-        element: <AdminRoute><AllRequest></AllRequest></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AllRequest></AllRequest>
+          </AdminRoute>
+        ),
       },
       {
         path: "addAsset",
-        element:<AdminRoute><AddAsset></AddAsset></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AddAsset></AddAsset>
+          </AdminRoute>
+        ),
       },
       {
         path: "assetList",
-        element:<AdminRoute><AssetList></AssetList></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AssetList></AssetList>
+          </AdminRoute>
+        ),
       },
       {
         path: "customRequestList",
-        element:<AdminRoute><CustomRequestList></CustomRequestList></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <CustomRequestList></CustomRequestList>
+          </AdminRoute>
+        ),
       },
       {
         path: "addEmployee",
-        element:<AdminRoute><AddEmployee></AddEmployee></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <AddEmployee></AddEmployee>
+          </AdminRoute>
+        ),
       },
       {
         path: "payment",
-        element:<AdminRoute><Payment></Payment></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <Payment></Payment>
+          </AdminRoute>
+        ),
       },
       {
         path: "paymentPage/:id",
-        element:<AdminRoute><PaymentPage></PaymentPage></AdminRoute>,
+        element: (
+          <AdminRoute>
+            <PaymentPage></PaymentPage>
+          </AdminRoute>
+        ),
       },
-      
-    ]
-  }
+    ],
+  },
 ]);

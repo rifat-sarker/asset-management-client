@@ -15,7 +15,6 @@ import { ThemeProvider } from "styled-components";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 const defaultTheme = createTheme();
@@ -23,7 +22,7 @@ const defaultTheme = createTheme();
 const Login = () => {
   const { login, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
-  const axiosSecure = useAxiosSecure();
+
   const axiosPublic = useAxiosPublic();
 
   const from = location.state?.from?.pathname || "/";

@@ -45,6 +45,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(auth);
   };
+  
   // google login
   const googleLogin = () => {
     setLoading(true);
