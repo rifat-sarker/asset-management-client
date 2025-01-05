@@ -14,7 +14,6 @@ export default function Navbar2() {
       .then()
       .catch((error) => console.log(error));
   };
-
   return (
     <nav className="bg-white border-b border-gray-200 px-4 py-3 dark:bg-gray-800">
       <div className="container mx-auto flex items-center justify-between">
